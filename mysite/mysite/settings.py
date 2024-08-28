@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-@5f^6m3zgl_soucqr1^t96#=95nybn5_bsd#av#6w$k_4h16cl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
+AUTH_USER_MODEL = 'api.User'
 
 
 # Application definition
@@ -38,7 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
-    'rest_framework'
+    'rest_framework',
+    'corsheaders',
+    'drfpasswordless',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -123,3 +130,17 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+     'DEFAULT_AUTHENTICATION_CLASSES':
+    ('rest_framework.authentication.TokenAuthentication',
+ )}
+
+PASSWORDLESS_AUTH = {
+   'PASSWORDLESS_AUTH_TYPES': ['EMAIL', 'MOBILE'],
+    'PASSWORDLESS_EMAIL_NOREPLY_ADDRESS': 'noreply@clcgh.org',
+
+   
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'#to be changed before deployment
