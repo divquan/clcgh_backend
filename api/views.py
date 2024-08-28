@@ -7,9 +7,10 @@ from rest_framework.permissions import IsAuthenticated
 
 import json
 # Create your views here.
+
 @csrf_exempt
+@api_view(['POST'])
 def createUser(request):
-    if request.method == 'POST':
 
         body = json.loads(request.body)
 
@@ -32,16 +33,12 @@ def createUser(request):
         
         return JsonResponse({'message': 'User created successfully!', "status": 200})
 
-    else:
-        return JsonResponse({'message': 'Invalid request method!', "status": 405})
-
-    return JsonResponse({'message': 'User created successfully!'})
     
 
 
 
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def login(request):
     # This will only be executed if the user is authenticated
     return JsonResponse({"message": f"Hello, {request.user.username}. You are authenticated!"})
