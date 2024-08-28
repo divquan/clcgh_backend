@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-@5f^6m3zgl_soucqr1^t96#=95nybn5_bsd#av#6w$k_4h16cl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0 "]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0","clcgh-backend.onrender.com"]
 
 AUTH_USER_MODEL = 'api.User'
 
