@@ -4,6 +4,7 @@ colorama==0.4.6
 dj-database-url==2.2.0
 Django==5.1
 django-cors-headers==4.4.0
+django-phonenumber-field==8.0.0
 djangorestframework==3.15.2
 drfpasswordless==1.5.9
 environs==11.0.0
@@ -11,6 +12,7 @@ gunicorn==23.0.0
 h11==0.14.0
 marshmallow==3.22.0
 packaging==24.1
+phonenumbers==8.13.44
 psycopg2-binary==2.9.9
 python-dotenv==1.0.1
 sqlparse==0.5.1
