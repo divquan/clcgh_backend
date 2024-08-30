@@ -11,9 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import dj_database_url
 import os
 from dotenv import load_dotenv
+from os import getenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +24,6 @@ load_dotenv()  # Load environment variables from .env file
 # environment variables
 # DEBUG = os.getenv('DEBUG', 'False') == 'True'
 SECRET_KEY = os.getenv('SECRET_KEY')
-DATABASE_URL = os.getenv('DATABASE_URL')
 
 
 # Quick-start development settings - unsuitable for production
@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'drfpasswordless',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'phonenumber_field'
 ]
 
 MIDDLEWARE = [
@@ -90,26 +91,19 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
-    'default': dj_database_url.parse(DATABASE_URL)
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': getenv('PGDATABASE'),
+    'USER': getenv('PGUSER'),
+    'PASSWORD': getenv('PGPASSWORD'),
+    'HOST': getenv('PGHOST'),
+    'PORT': getenv('PGPORT', 5432),
+    'OPTIONS': {
+      'sslmode': 'require',
+    },
+  }
 }
-
-# DATABASES = {
-#     'default': dj_database_url.parse(DATABASE_URL).config(
-#         # Replace this value with your local database's connection string.
-#         default=DATABASE_URL,
-#         conn_max_age=600
-#     )
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
